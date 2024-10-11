@@ -15388,3 +15388,11 @@ var __webpack_exports__PDFViewerApplicationOptions = __webpack_exports__.PDFView
 export { __webpack_exports__PDFViewerApplication as PDFViewerApplication, __webpack_exports__PDFViewerApplicationConstants as PDFViewerApplicationConstants, __webpack_exports__PDFViewerApplicationOptions as PDFViewerApplicationOptions };
 
 //# sourceMappingURL=viewer.mjs.map
+
+document.getElementById('openInNewTab').addEventListener('click', function() {
+  // Lấy URL hiện tại của PDF.js (trang đang mở file PDF)
+  var currentUrl = window.location.href;
+
+  // Mở URL của trang PDF.js trong một tab mới
+  window.open(currentUrl, '_blank');
+});
