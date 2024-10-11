@@ -16,12 +16,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
       - name: Run
         run: |
-          rm -rf *
+          rm -rf web build LICENSE
           wget "$URL" && unzip "$(basename "$URL")" && rm "$(basename "$URL")"
         env:
           URL: ${{ github.event.inputs.URL }}
@@ -34,4 +32,4 @@ jobs:
           git commit -m "Run a.sh and update files" || echo "No changes to commit"
           git push origin main
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_PAT }}
