@@ -3800,6 +3800,11 @@ body.wait::before{
           mask-image:var(--toolbarButton-print-icon);
 }
 
+#openInNewTab::before{
+  -webkit-mask-image:var(--toolbarButton-openFile-icon);
+          mask-image:var(--toolbarButton-openFile-icon);
+}
+
 #secondaryOpenFile::before{
   -webkit-mask-image:var(--toolbarButton-openFile-icon);
           mask-image:var(--toolbarButton-openFile-icon);
