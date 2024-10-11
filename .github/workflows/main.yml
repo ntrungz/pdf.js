@@ -1,0 +1,29 @@
+name: Download pdf.js
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run a.sh
+        run: |
+          chmod +x a.sh
+          ./a.sh
+
+      - name: Commit and Push changes
+        run: |
+          git config --local user.name "ntrungz"
+          git config --local user.email "ntrung1608@gmail.com"
+          git add .
+          git commit -m "Run a.sh and update files" || echo "No changes to commit"
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
