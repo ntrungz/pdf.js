@@ -1,4 +1,4 @@
-name: Run Script and Push
+name: Update
 
 on:
   push:
@@ -10,15 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.TOKEN }}  # Sử dụng PAT của bạn
-
       - name: Run a.sh
         run: |
-          chmod +x a.sh
-          ./a.sh
+          URL="https://github.com/mozilla/pdf.js/releases/download/v4.6.82/pdfjs-4.6.82-dist.zip"
+          wget "$URL" && unzip "$(basename "$URL")" && rm "$(basename "$URL")"
 
       - name: Commit and Push changes
         run: |
@@ -28,4 +23,4 @@ jobs:
           git commit -m "Run a.sh and update files" || echo "No changes to commit"
           git push origin main
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}  # Sử dụng PAT của bạn
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
