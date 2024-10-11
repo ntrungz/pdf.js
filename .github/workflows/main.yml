@@ -1,9 +1,7 @@
 name: Download pdf.js
 
 on:
-  push:
-    branches:
-      - main
+  dispatch:
 
 jobs:
   run-script:
