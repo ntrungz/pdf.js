@@ -1,9 +1,13 @@
 name: Update
 
-on:
-  push:
-    branches:
-      - main
+on: 
+  workflow_dispatch:
+    inputs:
+      URL:
+        type: string
+        description: URL of pdfjs from mozilla
+        default: 'https://github.com/mozilla/pdf.js/releases/download/v4.7.76/pdfjs-4.7.76-dist.zip'
+        required: true
 
 jobs:
   run-script:
@@ -16,8 +20,9 @@ jobs:
       - name: Run
         run: |
           rm -rf *
-          URL="https://github.com/mozilla/pdf.js/releases/download/v4.6.82/pdfjs-4.6.82-dist.zip"
           wget "$URL" && unzip "$(basename "$URL")" && rm "$(basename "$URL")"
+        env:
+          URL: ${{ github.event.inputs.URL }}
 
       - name: Commit and Push changes
         run: |
