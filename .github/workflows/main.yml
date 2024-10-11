@@ -1,17 +1,19 @@
-name: Download pdf.js
+name: Run Script and Push
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   run-script:
     runs-on: ubuntu-latest
-    env:
-      TOKEN: ${{ secrets.TOKEN }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.TOKEN }}  # Sử dụng PAT của bạn
 
       - name: Run a.sh
         run: |
@@ -20,10 +22,10 @@ jobs:
 
       - name: Commit and Push changes
         run: |
-          git config --local user.name "ntrungz"
-          git config --local user.email "ntrung1608@gmail.com"
+          git config --local user.name "github-actions"
+          git config --local user.email "github-actions@github.com"
           git add .
           git commit -m "Run a.sh and update files" || echo "No changes to commit"
           git push origin main
         env:
-          TOKEN: ${{ secrets.TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}  # Sử dụng PAT của bạn
